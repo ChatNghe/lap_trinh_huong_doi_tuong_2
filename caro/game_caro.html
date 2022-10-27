@@ -22,8 +22,7 @@
 </head>
 <body>
 <h1>Caro Game</h1>
-<!--<button style='background-image: url("red.jpg"); background-repeat: no-repeat;background-size: cover'>-->
-<!--</button>-->
+
 <label>Number of row <input type="text" id="row"></label>
 <label>Number of column <input type="text" id="column"></label>
 <button style="padding: 3px 10px;
@@ -37,6 +36,7 @@
             height: 25px;"
         onclick="start()">Start
 </button>
+<br><br>
 <table id="show">
 
 </table>
@@ -92,14 +92,16 @@
                 if (arr[i][j] === 'X') {
                     if ((arr[i][j] === arr[i][j + 1] && arr[i][j + 1] === arr[i][j + 2] && arr[i][j + 2] === arr[i][j + 3] && arr[i][j + 3] === arr[i][j + 4])
                         || (arr[i][j] === arr[i + 1][j] && arr[i + 1][j] === arr[i + 2][j] && arr[i + 2][j] === arr[i + 3][j] && arr[i + 3][j] === arr[i + 4][j])
-                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])) {
+                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])
+                        || (arr[i][j] === arr[i + 1][j - 1] && arr[i + 1][j - 1] === arr[i + 2][j - 2] && arr[i + 2][j - 2] === arr[i + 3][j - 3] && arr[i + 3][j - 3] === arr[i + 4][j - 4])) {
                         alert('X wins!');
                     }
                 }
                 if (arr[i][j] === 'O') {
                     if ((arr[i][j] === arr[i][j + 1] && arr[i][j + 1] === arr[i][j + 2] && arr[i][j + 2] === arr[i][j + 3] && arr[i][j + 3] === arr[i][j + 4])
                         || (arr[i][j] === arr[i + 1][j] && arr[i + 1][j] === arr[i + 2][j] && arr[i + 2][j] === arr[i + 3][j] && arr[i + 3][j] === arr[i + 4][j])
-                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])) {
+                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])
+                        || (arr[i][j] === arr[i + 1][j - 1] && arr[i + 1][j - 1] === arr[i + 2][j - 2] && arr[i + 2][j - 2] === arr[i + 3][j - 3] && arr[i + 3][j - 3] === arr[i + 4][j - 4])) {
                         alert('O wins!');
                     }
                 }

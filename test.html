@@ -7,19 +7,29 @@
 <body>
 
 <script>
-    let arr = [
-        [1, 2, 3, 4],
-        [1, 2, 3, 4],
-        [1, 2, 3, 4]
-    ]
-    let sum = 0;
-    for (let j = 0; j < arr[0].length; j++) {
-        sum = 0;
-        for (let i = 0; i < arr.length; i++) {
-            sum += arr[i][j];
+    function miniMaxSum(arr) {
+        // Write your code here
+        let min = arr[0];
+        let max = arr[0];
+        let sum = 0;
+        for (let i = 0;i<arr.length;i++){
+            sum += arr[i];
+            if (arr[i]>max){
+                max = arr[i];
+            }
         }
-        document.write("tong cot " + j + " la " + sum + "<br>")
+        for (let i = 0;i<arr.length;i++){
+            if (arr[i]<min){
+                min = arr[i];
+            }
+        }
+        let sumMax = sum - min;
+        let sumMin = sum - max;
+        return (sumMin,sumMax)
+        // document.write(sumMin+' '+sumMax);
+
     }
+    document.write(miniMaxSum([256741038, 623958417 ,467905213 ,714532089, 938071625]))
 
 </script>
 </body>
