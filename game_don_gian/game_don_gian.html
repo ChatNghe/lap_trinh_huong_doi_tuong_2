@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="game"></div>
+<script>
+    // function Hero(image, top, left, size, speed) {
+    //     this.image = image;
+    //     this.top = top;
+    //     this.left = left;
+    //     this.size = size;
+    //     this.speed = speed
+    //     this.getHeroElement = function () {
+    //         return '<img width="' + this.size + '"' +
+    //             ' height="' + this.size + '"' +
+    //             ' src="' + this.image + '"' +
+    //             ' style="top: ' + this.top + 'px; left:' + this.left + 'px;position:absolute;" />';
+    //     }
+    //
+    //     this.moveRight = function () {
+    //         this.left += 20;
+    //         console.log('ok: ' + this.left);
+    //     }
+    //     this.moveSpeed = function () {
+    //         return setTimeout(start, this.speed)
+    //     }
+    //
+    // }
+    class Hero {
+        constructor(image, top, left, size, speed) {
+            this.image = image;
+            this.top = top;
+            this.left = left;
+            this.size = size;
+            this.speed = speed;
+            this.getHeroElement = function () {
+                return '<img width="' + this.size + '"' +
+                    ' height="' + this.size + '"' +
+                    ' src="' + this.image + '"' +
+                    ' style="top: ' + this.top + 'px; left:' + this.left + 'px;position:absolute;" />';
+            }
+        }
+        moveRight()
+        {
+            this.left += 20;
+        }
+        moveRandom(){
+            this.left += [-1,1][Math.random()*2|0];
+            this.top += [-1,1][Math.random()*2|0];
+        }
+        moveSpeed(){
+            this.speed /= 10;
+            return this.speed;
+        }
+    }
+
+    let hero = new Hero('pikachu.png', 20, 30, 200, 500);
+    function start() {
+        if (hero.left < window.innerWidth - hero.size) {
+            hero.moveRandom();
+        }
+        document.getElementById('game').innerHTML = hero.getHeroElement();
+        setTimeout(start, hero.moveSpeed())
+    }
+    start();
+</script>
+</body>
+</html>
