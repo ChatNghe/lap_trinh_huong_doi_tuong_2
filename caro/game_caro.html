@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        body {
+            text-align: center;
+        }
+
         button {
             border: solid 1px black;
             height: 50px;
@@ -11,11 +15,12 @@
         }
 
         input {
-            width: 100px;
+            width: 80px;
         }
 
-        image {
-            height: auto;
+        p {
+
+            font-weight: bold;
         }
 
     </style>
@@ -23,8 +28,8 @@
 <body>
 <h1>Caro Game</h1>
 
-<label>Number of row <input type="text" id="row"></label>
-<label>Number of column <input type="text" id="column"></label>
+<label>Number of row <input type="text" id="row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+<label>Number of column <input type="text" id="column">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
 <button style="padding: 3px 10px;
             border-radius: 20px;
             -moz-border-radius: 20px;
@@ -37,7 +42,7 @@
         onclick="start()">Start
 </button>
 <br><br>
-<table id="show">
+<table id="show" style="margin: auto">
 
 </table>
 <script>
@@ -69,7 +74,7 @@
     function tick(i, j) {
         if (flag === 0) {
             if (arr[i][j] !== 'X' && arr[i][j] !== 'O') {
-                document.getElementById(`${i}${j}`).innerHTML = 'X';
+                document.getElementById(`${i}${j}`).innerHTML = '<p style="color: blue">X</p>';
                 arr[i][j] = 'X'
                 flag = 1
             } else alert('Choose another');
@@ -77,31 +82,25 @@
 
         } else {
             if (arr[i][j] !== 'X' && arr[i][j] !== 'O') {
-                document.getElementById(`${i}${j}`).innerHTML = 'O';
+                document.getElementById(`${i}${j}`).innerHTML = '<p style="color: red">O</p>';
                 arr[i][j] = 'O';
                 flag = 0
             } else alert('Choose another');
         }
         check(row, column);
-        // console.log(arr)
     }
 
     function check(row, column) {
         for (let i = 0; i < row; i++) {
             for (let j = 0; j < column; j++) {
-                if (arr[i][j] === 'X') {
-                    if ((arr[i][j] === arr[i][j + 1] && arr[i][j + 1] === arr[i][j + 2] && arr[i][j + 2] === arr[i][j + 3] && arr[i][j + 3] === arr[i][j + 4])
-                        || (arr[i][j] === arr[i + 1][j] && arr[i + 1][j] === arr[i + 2][j] && arr[i + 2][j] === arr[i + 3][j] && arr[i + 3][j] === arr[i + 4][j])
-                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])
-                        || (arr[i][j] === arr[i + 1][j - 1] && arr[i + 1][j - 1] === arr[i + 2][j - 2] && arr[i + 2][j - 2] === arr[i + 3][j - 3] && arr[i + 3][j - 3] === arr[i + 4][j - 4])) {
+                if ((arr[i][j] === arr[i][j + 1] && arr[i][j + 1] === arr[i][j + 2] && arr[i][j + 2] === arr[i][j + 3] && arr[i][j + 3] === arr[i][j + 4])
+                    || (arr[i][j] === arr[i + 1][j] && arr[i + 1][j] === arr[i + 2][j] && arr[i + 2][j] === arr[i + 3][j] && arr[i + 3][j] === arr[i + 4][j])
+                    || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])
+                    || (arr[i][j] === arr[i + 1][j - 1] && arr[i + 1][j - 1] === arr[i + 2][j - 2] && arr[i + 2][j - 2] === arr[i + 3][j - 3] && arr[i + 3][j - 3] === arr[i + 4][j - 4])) {
+                    if (arr[i][j] === 'X') {
                         alert('X wins!');
                     }
-                }
-                if (arr[i][j] === 'O') {
-                    if ((arr[i][j] === arr[i][j + 1] && arr[i][j + 1] === arr[i][j + 2] && arr[i][j + 2] === arr[i][j + 3] && arr[i][j + 3] === arr[i][j + 4])
-                        || (arr[i][j] === arr[i + 1][j] && arr[i + 1][j] === arr[i + 2][j] && arr[i + 2][j] === arr[i + 3][j] && arr[i + 3][j] === arr[i + 4][j])
-                        || (arr[i][j] === arr[i + 1][j + 1] && arr[i + 1][j + 1] === arr[i + 2][j + 2] && arr[i + 2][j + 2] === arr[i + 3][j + 3] && arr[i + 3][j + 3] === arr[i + 4][j + 4])
-                        || (arr[i][j] === arr[i + 1][j - 1] && arr[i + 1][j - 1] === arr[i + 2][j - 2] && arr[i + 2][j - 2] === arr[i + 3][j - 3] && arr[i + 3][j - 3] === arr[i + 4][j - 4])) {
+                    if (arr[i][j] === 'O') {
                         alert('O wins!');
                     }
                 }

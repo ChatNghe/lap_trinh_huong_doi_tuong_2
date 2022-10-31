@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        button {
+            border: solid 1px black;
+            height: 50px;
+            width: 50px;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Memory Game</h1>
+
+<label>Game mode &nbsp&nbsp;<select id="mode">
+    <option value="1">Easy</option>
+    <option value="2">Medium</option>
+    <option value="3">Hard</option>
+</select></label>&nbsp&nbsp;
+<button style="padding: 3px 10px;
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+            border: none;
+            background: #8AC007;
+            color: #fff;
+            cursor: pointer;
+            height: 25px;"
+        onclick="start()">Start
+</button>
+<br><br>
+<table id="show" style="margin: auto">
+
+</table>
+<script>
+    let k = 0;
+    let flag = 1;
+    let endGameCheck = 0;
+    let compare = [];
+    let img1;
+    let img2;
+
+    class Board {
+        constructor(row, column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        draw() {
+            let str = ``;
+            k = 0;
+            for (let i = 0; i < this.row; i++) {
+                str += `<tr>`;
+                for (let j = 0; j < this.column; j++) {
+
+                    str += `<td><img id="${i}${j}" height="90px" width="90px" src="./white.jpg" onclick="changeImg(${i},${j},${k})"></td>`;
+                    k++;
+                }
+                str += `</tr><br>`;
+            }
+            document.getElementById('show').innerHTML = str;
+
+        }
+    }
+
+    function changeImg(i, j, k) {
+        if (flag === 0) {
+            let result = JSON.parse(localStorage.getItem('result'));
+            img1 = document.getElementById(`${i}${j}`);
+            img1.src = "./anh" + result[k] + ".png";
+            compare.push(result[k])
+            flag++;
+
+        } else {
+            let result = JSON.parse(localStorage.getItem('result'));
+            img2 = document.getElementById(`${i}${j}`);
+            img2.src = "./anh" + result[k] + ".png";
+            compare.push(result[k])
+            flag--;
+
+        }
+        localStorage.setItem('compare', JSON.stringify(compare));
+        if (flag === 1) setTimeout(function check() {
+            let compare = JSON.parse(localStorage.getItem('compare'))
+            if (compare[0] !== compare[1]) {
+                img1.src = "./white.jpg";
+                img2.src = "./white.jpg";
+                console.log(0);
+            }
+            if (compare[0] === compare[1]){
+                endGameCheck++;
+            }
+            if (endGameCheck === row*column/2){
+                alert('You win');
+                start();
+            }
+        }, 400);
+        if (flag === 1) compare = [];
+    }
+
+
+    function randomUniqueNum(range, outputCount) {
+        let arr = []
+        for (let i = 1; i <= range; i++) {
+            arr.push(i);
+            arr.push(i);
+        }
+        let result = [];
+        for (let i = 1; i <= outputCount; i++) {
+            const random = Math.floor(Math.random() * (range - i));
+            result.push(arr[random]);
+            arr[random] = arr[range - i];
+        }
+        return result;
+    }
+
+    function start() {
+        console.log(e.value)
+        endGameCheck = 0;
+        switch (e.value) {
+            case '1':
+                row = 3;
+                column = 4;
+                break;
+            case '2':
+                row = 4;
+                column = 5;
+                break;
+            case '3':
+                row = 5;
+                column = 6;
+                break;
+        }
+        console.log(row, column)
+        board = new Board(row, column);
+        board.draw();
+        let result = randomUniqueNum(k, k)
+        localStorage.setItem('result', JSON.stringify(result));
+    }
+
+    let row;
+    let column;
+    let board;
+    let e = document.getElementById("mode");
+</script>
+</body>
+</html>
